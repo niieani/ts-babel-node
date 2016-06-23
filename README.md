@@ -15,7 +15,7 @@ Because you want `ts-node` to run `async`/`await` code, but TypeScript will only
 To use `ts-babel-node` on the command line, install this package globally. Be sure to include whichever version of TypeScript you want to compile against.
 
 ```
-$ npm install --global ts-babel-node typescript@1.8
+$ npm install --global ts-babel-node typescript babel-core babel-polyfill babel-preset-es2015 ts-node
 
 $ ts-babel-node my-file.ts
 ```
@@ -25,25 +25,25 @@ $ ts-babel-node my-file.ts
 To include `ts-babel-node` as a register function, install this package as a development dependency. Be sure to include whichever version of TypeScript you want to compile against.
 
 ```
-$ npm install --save-dev ts-babel-node typescript@1.8
+$ npm install --save-dev ts-babel-node typescript babel-core babel-polyfill babel-preset-es2015 ts-node
 ```
 
 ## Usage
 
 ### Command Line
 
-Since `ts-babel-node` is a wrapper around `ts-node`, anything you can do with `ts-node` works with `ts-babel-node`. See [`ts-node`'s docs](https://github.com/TypeStrong/ts-node/#usage) for more details.
+Since `ts-babel-node-extendable` is a wrapper around `ts-node`, anything you can do with `ts-node` works with `ts-babel-node-extendable`. See [`ts-node`'s docs](https://github.com/TypeStrong/ts-node/#usage) for more details.
 
 ### Library
 
-`ts-babel-node` exposes two APIs. The first is a wrapper around the `ts-node` API.
+`ts-babel-node-extendable` exposes two APIs. The first is a wrapper around the `ts-node` API.
 
 ```js
 // $ node this-file.js
 
-require('ts-babel-node').register(/* ts-node options */);
+require('ts-babel-node-extendable').register(/* ts-node options, extra babel property for babel options */);
 // Or
-require('ts-babel-node/register');
+require('ts-babel-node-extendable/register');
 ```
 
 You can also use this with the `--require ` option on `node`.
@@ -57,21 +57,21 @@ The second API only adds the babel-compilation step. This is useful if your code
 ```js
 // $ ts-node this-file.js
 
-require('ts-babel-node').registerBabel();
+require('ts-babel-node-extendable').registerBabel();
 // Or
-require('ts-babel-node/register-babel');
+require('ts-babel-node-extendable/register-babel');
 ```
 
 ### Mocha
 
 ```
-$ mocha --require ts-babel-node/register [...args]
+$ mocha --require ts-babel-node-extendable/register [...args]
 ```
 
 ### Tape
 
 ```
-$ ts-babel-node node_modules/.bin/tape [...args]
+$ ts-babel-node-extendable node_modules/.bin/tape [...args]
 ```
 
 ### Gulp
@@ -79,7 +79,7 @@ $ ts-babel-node node_modules/.bin/tape [...args]
 In your `gulpfile.ts` (note, `.ts`, not `.js`):
 
 ```
-import 'ts-babel-node/register-babel';
+import 'ts-babel-node-extendable/register-babel';
 // ...
 ```
 
